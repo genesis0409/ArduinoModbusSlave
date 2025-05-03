@@ -1004,7 +1004,8 @@ uint16_t Modbus::writeResponse()
     }
 
     // If all the data has been send and more than 1.5T has passed.
-    if (_responseBufferWriteIndex >= _responseBufferLength && (micros() - _lastCommunicationTime) > (_halfCharTimeInMicroSecond * MODBUS_HALF_SILENCE_MULTIPLIER))
+    // if (_responseBufferWriteIndex >= _responseBufferLength && (micros() - _lastCommunicationTime) > (_halfCharTimeInMicroSecond * MODBUS_HALF_SILENCE_MULTIPLIER))
+    if (_responseBufferWriteIndex >= _responseBufferLength)
     {
         // End the transmission.
         if (_transmissionControlPin > MODBUS_CONTROL_PIN_NONE)
