@@ -980,7 +980,6 @@ uint16_t Modbus::writeResponse()
         // Check if all the data has been sent.
         if (_serialStream.availableForWrite() < _serialTransmissionBufferLength)
         {
-            _lastCommunicationTime = micros();
             return length;
         }
 
@@ -997,6 +996,7 @@ uint16_t Modbus::writeResponse()
         {
             length = _serialStream.write(_responseBuffer, length);
             _serialStream.flush();
+            _lastCommunicationTime = micros();
         }
 
         _responseBufferWriteIndex += length;
